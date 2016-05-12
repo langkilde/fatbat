@@ -8,19 +8,22 @@
     "continuation-local-storage": "^3.1.4",
     "express": "^4.13.3",
     "fitbit-client-oauth2": "^2.0.3",
-    "fitbit-oauth2": "^0.0.1",
     "fitbit-node": "^1.0.0",
     "kerberos": "^0.0.17",
+    "fitbit-oauth2": "^0.0.1",
     "http": "^0.0.0",
+    "kerberos": "^0.0.17",
     "mongodb": "^2.1.2",
     "oauth2-server": "^2.4.1",
     "passport": "^0.3.2",
     "passport-fitbit-oauth2": "^1.0.1",
     "request": "^2.67.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha --reporter spec",
     "start": "node server.js"
   },
   "repository": {
