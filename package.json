@@ -9,7 +9,6 @@
     "express": "^4.13.3",
     "fitbit-client-oauth2": "^2.0.3",
     "fitbit-node": "^1.0.0",
-    "kerberos": "^0.0.17",
     "fitbit-oauth2": "^0.0.1",
     "http": "^0.0.0",
     "kerberos": "^0.0.17",
