@@ -4,10 +4,35 @@
     <meta charset="UTF-8">
     <title>fatbat</title>
     <link rel="icon" href="../img/favicon.ico">
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body>
 the bitcave
+<script>
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    $(document).ready(function(){
+        var user_id         = getParameterByName('user_id');
+        var access_secret   = getParameterByName('access_token');
+        $('body').append('<p>'+user_id+'</p>')
+                 .append('<p>'+access_secret+'</p>');
+
+        $.get("/data", { access_secret: access_secret }, function(result) {
+            $('body').append('<p>'+JSON.stringify(result,' ', 2)+'</p>');
+        });
+    });
+
+</script>
 </body>
 
 </html>

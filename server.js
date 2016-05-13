@@ -8,9 +8,19 @@ var fs              = require('fs');
 var config          = require('./config/fitbit.json');
 var client          = new FitbitClient(config.client_id, config.client_secret);
 var redirect_uri    = 'http://localhost:3000/auth/fitbit/callback';
-var scope           =  'activity heartrate profile sleep profile weight';
+var scope           = 'activity heartrate profile sleep profile weight';
 var mongo_url       = 'mongodb://localhost:27017/fatbat';
 var server          = express();
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
 server.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/views/index.html');
@@ -29,6 +39,23 @@ server.get('/bitcave', function(req, res) {
     console.log('BITCAVE : entered bitcave');
     console.log('BITCAVE : user_id      : ',req.query.user_id);
     console.log('BITCAVE : access_token : ',req.query.access_token);
+    
+});
+
+server.get('/auth/fitbit/callback', function(req, res) {
+    console.log('AUTH : fitbit callback received');
+    var code = req.query.code;
+    console.log('AUTH : retrieved code : '+code+', getting token...');
+    client.getToken(code, redirect_uri).then(function(token) {
+        console.log('AUTH : received token : ' + JSON.stringify(token, null, 2));
+        MongoClient.connect(mongo_url, function(err, db) {
+            insertToken(token.token, db, function(db_insertion_result) {
+                db.close();
+            });
+        });
+        console.log('AUTH : authorization completed');
+        res.redirect('/bitcave?user_id='+token.token.user_id+'&access_token='+token.token.access_token);
+    });
 });
 
 var insertToken = function(token, db, callback) {
@@ -55,61 +82,31 @@ var insertToken = function(token, db, callback) {
     });
 };
 
-server.get('/auth/fitbit/callback', function(req, res) {
-    console.log('AUTH : fitbit callback recieved');
-    var code = req.query.code;
-    console.log('AUTH : retrieved code : '+code+', getting token...');
-    client.getToken(code, redirect_uri).then(function(token) {
-        console.log('AUTH : received token : ' + JSON.stringify(token, null, 2));
-        MongoClient.connect(mongo_url, function(err, db) {
-            insertToken(token.token, db, function(db_insertion_result) {
-                db.close();
-            });
-        });
-        console.log('AUTH : authorization completed');
-        res.redirect('/bitcave?user_id='+token.token.user_id+'&access_token='+token.token.access_token);
-    });
-});
 
-server.get('/users', function(req, res) {
-    console.log('<------------------------------------------------------------------->');
-    var id              = req.query.id;
-    console.log(id);
-    var access_token    = req.query.access_token;
-    console.log(access_token);
+
+server.get('/data', function(req, res) {
+    var access_secret = getParameterByName('access_secret', req['url']);
+    console.log('DATA : access_secret '+access_secret);
 
     var options = {
         host: 'api.fitbit.com',
-        path: '/1/user/-/activities/tracker/steps/date/2015-01-01/2015-12-24.json',
+        path: '/1/user/-/activities/tracker/steps/date/2016-01-01/2016-01-31.json',
         method: 'GET',
         headers: {
-            Authorization: 'Bearer '+access_token
+            Authorization: 'Bearer '+access_secret
         }
     };
-    console.log(options);
 
-    callback = function(response) {
+    https.request(options, function(response) {
         var str = '';
         response.on('data', function (chunk) {
             str += chunk;
         });
         response.on('end', function () {
-            var data = JSON.parse(str);
-            var dailySteps = data['activities-tracker-steps'];
-            var numSteps = dailySteps.length;
-            console.log(numSteps);
-            var totalSteps = 0;
-            for (var i = 0; i < numSteps; i++) {
-                var stepCount   = dailySteps[i].value;
-                var date        = dailySteps[i].dateTime;
-                totalSteps += +stepCount;
-                console.log(stepCount);
-            }
-            console.log(totalSteps);
+            var result = JSON.parse(str);
+            console.log(result);
         });
-        console.log('done!');
-    };
-    https.request(options, callback).end();
+    }).end();
 });
 
 server.listen(3000);
