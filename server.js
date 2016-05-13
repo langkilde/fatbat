@@ -5,6 +5,7 @@ var url             = require('url');
 var MongoClient     = require('mongodb').MongoClient;
 var assert          = require('assert');
 var fs              = require('fs');
+var request         = require('sync-request');
 var config          = require('./config/fitbit.json');
 var client          = new FitbitClient(config.client_id, config.client_secret);
 var redirect_uri    = 'http://localhost:3000/auth/fitbit/callback';
@@ -82,31 +83,36 @@ var insertToken = function(token, db, callback) {
     });
 };
 
-
-
 server.get('/data', function(req, res) {
     var access_secret = getParameterByName('access_secret', req['url']);
     console.log('DATA : access_secret '+access_secret);
-
+    var path = '/1/user/-/activities/tracker/steps/date/2016-01-01/2016-01-01.json';
     var options = {
-        host: 'api.fitbit.com',
-        path: '/1/user/-/activities/tracker/steps/date/2016-01-01/2016-01-31.json',
-        method: 'GET',
         headers: {
             Authorization: 'Bearer '+access_secret
         }
     };
+    var result = request('GET', 'https://api.fitbit.com'+path, options);
+    var body = result.getBody();
+    console.log('DATA : '+ body);
+    res.send(body).end();
+});
 
-    https.request(options, function(response) {
-        var str = '';
-        response.on('data', function (chunk) {
-            str += chunk;
-        });
-        response.on('end', function () {
-            var result = JSON.parse(str);
-            console.log(result);
-        });
-    }).end();
+server.get('/user', function(req, res) {
+    var access_secret   = getParameterByName('access_secret', req['url']);
+    var user_id         = getParameterByName('user_id', req['url']);
+
+    console.log('DATA : access_secret '+access_secret);
+    var path = '/1/user/'+user_id+'/profile.json';
+    var options = {
+        headers: {
+            Authorization: 'Bearer '+access_secret
+        }
+    };
+    var result = request('GET', 'https://api.fitbit.com'+path, options);
+    var body = result.getBody();
+    console.log('DATA : '+ body);
+    res.send(body).end();
 });
 
 server.listen(3000);

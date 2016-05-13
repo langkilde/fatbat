@@ -16,7 +16,8 @@
     "oauth2-server": "^2.4.1",
     "passport": "^0.3.2",
     "passport-fitbit-oauth2": "^1.0.1",
-    "request": "^2.67.0"
+    "request": "^2.67.0",
+    "sync-request": "^3.0.1"
   },
   "devDependencies": {
     "mocha": "^2.4.5"

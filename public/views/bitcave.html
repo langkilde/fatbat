@@ -21,15 +21,19 @@ the bitcave
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
+    callback = function(data) {
+        var pretty_data = JSON.stringify(data, ' ', 2);
+        $('body').append('<p>'+pretty_data+'</p>');
+    };
+
     $(document).ready(function(){
         var user_id         = getParameterByName('user_id');
         var access_secret   = getParameterByName('access_token');
         $('body').append('<p>'+user_id+'</p>')
                  .append('<p>'+access_secret+'</p>');
+        $.get("/user", { access_secret: access_secret, user_id : user_id }, callback);
 
-        $.get("/data", { access_secret: access_secret }, function(result) {
-            $('body').append('<p>'+JSON.stringify(result,' ', 2)+'</p>');
-        });
+        $.get("/data", { access_secret: access_secret, user_id : user_id }, callback);
     });
 
 </script>
