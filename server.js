@@ -2,19 +2,21 @@ var FitbitClient    = require('fitbit-client-oauth2');
 var express         = require('express');
 var https           = require('https');
 var url             = require('url');
-var server          = express();
 var MongoClient     = require('mongodb').MongoClient;
 var assert          = require('assert');
-var client          = new FitbitClient('229L8J', 'e9f4b704b543b7a7890e9c8c2d57fedd');
+var fs              = require('fs');
+var config          = require('./config/fitbit.json');
+var client          = new FitbitClient(config.client_id, config.client_secret);
 var redirect_uri    = 'http://localhost:3000/auth/fitbit/callback';
 var scope           =  'activity heartrate profile sleep profile weight';
 var mongo_url       = 'mongodb://localhost:27017/fatbat';
+var server          = express();
 
-server.get('/', function(req, res, next) {
+server.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/views/index.html');
 });
 
-server.get('/auth/fitbit', function(req, res, next) {
+server.get('/auth/fitbit', function(req, res) {
     console.log('AUTH : attempting to authorize user');
     var authorization_uri = client.getAuthorizationUrl(redirect_uri, scope);
     console.log('AUTH : redirecting to : ', authorization_uri);
@@ -22,7 +24,7 @@ server.get('/auth/fitbit', function(req, res, next) {
     res.redirect(authorization_uri);
 });
 
-server.get('/bitcave', function(req, res, next) {
+server.get('/bitcave', function(req, res) {
     res.sendFile(__dirname + '/public/views/bitcave.html');
     console.log('BITCAVE : entered bitcave');
     console.log('BITCAVE : user_id      : ',req.query.user_id);
@@ -53,7 +55,7 @@ var insertToken = function(token, db, callback) {
     });
 };
 
-server.get('/auth/fitbit/callback', function(req, res, next) {
+server.get('/auth/fitbit/callback', function(req, res) {
     console.log('AUTH : fitbit callback recieved');
     var code = req.query.code;
     console.log('AUTH : retrieved code : '+code+', getting token...');
