@@ -23,9 +23,12 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-server.get('/', function(req, res) {
+server.use(express.static(__dirname + '/public'));
+
+server.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/views/index.html');
 });
+
 
 server.get('/auth/fitbit', function(req, res) {
     console.log('AUTH : attempting to authorize user');
