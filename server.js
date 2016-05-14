@@ -115,4 +115,21 @@ server.get('/user', function(req, res) {
     res.send(body).end();
 });
 
+server.get('/heartrate', function(req, res) {
+    var access_secret   = getParameterByName('access_secret', req['url']);
+    var user_id         = getParameterByName('user_id', req['url']);
+
+    console.log('DATA : access_secret '+access_secret);
+    var path = '/1/user/-/activities/heart/date/2016-03-01/1d/1sec/time/00:00/12:00.json';
+    var options = {
+        headers: {
+            Authorization: 'Bearer '+access_secret
+        }
+    };
+    var result = request('GET', 'https://api.fitbit.com'+path, options);
+    var body = result.getBody();
+    console.log('DATA : '+body);
+    res.send(body).end();
+});
+
 server.listen(3000);
