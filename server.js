@@ -83,52 +83,40 @@ var insertToken = function(token, db, callback) {
     });
 };
 
-server.get('/data', function(req, res) {
-    var access_secret = getParameterByName('access_secret', req['url']);
-    console.log('DATA : access_secret '+access_secret);
-    var path = '/1/user/-/activities/tracker/steps/date/2016-01-01/2016-01-01.json';
+function getData(path, req_url) {
+    var access_secret   = getParameterByName('access_secret', req_url);
+    console.log('DATA : GET : access_secret : '+access_secret);
     var options = {
         headers: {
             Authorization: 'Bearer '+access_secret
         }
     };
     var result = request('GET', 'https://api.fitbit.com'+path, options);
-    var body = result.getBody();
-    console.log('DATA : '+ body);
+    console.log('DATA : GET : result        : '+ result.getBody());
+    return result.getBody();
+}
+
+server.get('/data', function(req, res) {
+    console.log('DATA : /data : initiated');
+    var user_id         = getParameterByName('user_id', req['url']);
+    var path = '/1/user/'+user_id+'/activities/steps/date/2015-01-01/2015-01-10.json';
+    var body = getData(path, req['url']);
     res.send(body).end();
 });
 
 server.get('/user', function(req, res) {
-    var access_secret   = getParameterByName('access_secret', req['url']);
+    console.log('DATA : /user : initiated');
     var user_id         = getParameterByName('user_id', req['url']);
-
-    console.log('DATA : access_secret '+access_secret);
     var path = '/1/user/'+user_id+'/profile.json';
-    var options = {
-        headers: {
-            Authorization: 'Bearer '+access_secret
-        }
-    };
-    var result = request('GET', 'https://api.fitbit.com'+path, options);
-    var body = result.getBody();
-    console.log('DATA : '+ body);
+    var body = getData(path, req['url']);
     res.send(body).end();
 });
 
 server.get('/heartrate', function(req, res) {
-    var access_secret   = getParameterByName('access_secret', req['url']);
+    console.log('DATA : /heartrate : initiated');
     var user_id         = getParameterByName('user_id', req['url']);
-
-    console.log('DATA : access_secret '+access_secret);
-    var path = '/1/user/-/activities/heart/date/2016-03-01/1d/1sec/time/00:00/12:00.json';
-    var options = {
-        headers: {
-            Authorization: 'Bearer '+access_secret
-        }
-    };
-    var result = request('GET', 'https://api.fitbit.com'+path, options);
-    var body = result.getBody();
-    console.log('DATA : '+body);
+    var path = '/1/user/'+user_id+'/activities/steps/date/2016-01-01/2016-01-10.json';
+    var body = getData(path, req['url']);
     res.send(body).end();
 });
 
