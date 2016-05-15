@@ -1,41 +1,59 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>fatbat</title>
-    <link rel="icon" href="../img/favicon.ico">
-    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>fatbat bitcave</title>
+    <meta name="description" content="fatbat signing">
+    <meta name="author" content="Daniel Langkilde">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link href="../css/bitcave.css" rel="stylesheet">
+    <link rel="icon" type="ico" href="../img/fatbat.ico">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
-<style>
-
-    .chart rect {
-        fill: steelblue;
-    }
-
-    .chart text {
-        fill: white;
-        font: 10px sans-serif;
-        text-anchor: end;
-    }
-
-</style>
-
 <body>
-the bitcave
-<button id="btn1" type="submit">
-    Heartrate
-</button>
-<button id="btn2" type="submit">
-    Steps
-</button>
-<div class="user-container">
-    <p class="user-raw"></p>
-    <img class="user-img" src="" height="150" width="150">
-    <p class="user-info"></p>
-</div>
-<svg class="chart"></svg>
+    <div class="sidebar">
+        <div class="user-container">
+                <img class="user-img" src="" height="150" width="150">
+            <p class="user-fullname"></p>
+        </div>
+    </div>
+	
+	<div class="query-area">
+        <h1>fatbat</h1>
+        <div class="query-examples">
+            <p>examples : for full list check <a href="https://dev.fitbit.com/docs/">fitbit API doc</a><br></p>
+            <p>Steps</p>
+            <p class="query-example">steps/date/[base-date]/[end-date].json</p>
+            <p class="query-example">activities/steps/date/today/1m.json</p>
+            <p>Heartrate</p>
+            <p class="query-example">heart/date/today/1d/1sec/time/00:00/00:01.json</p>
+            <p class="query-example">heart/date/[date]/[end-date]/[detail-level]/time/[start-time]/[end-time].json</p>
+            <p>Date format:     yyyy-MM-dd</p>
+            <p>Detail level:    1sec or 1min (optional)</p>
+        </div>
+
+        <div class="query-button-container">
+            <div class="col-lg-6">
+                <div class="input-group">
+                  <input id='text' type="text" class="form-control" placeholder="Query for data...">
+                  <span class="input-group-btn">
+                    <button id="query" class="btn btn-default" type="button">Go!</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="query-result">
+        <pre>test</pre>
+    </div>
 </body>
 
 <script>
@@ -51,64 +69,35 @@ the bitcave
 
     user_rendering = function(data) {
         var parsed = JSON.parse(data);
-//        d3.select('.user-raw').text(data);
         d3.select('.user-img').attr('src', parsed['user']['avatar150'].toString())
-        d3.select('.user-info').text(parsed['user']['fullName']);
+        d3.select('.user-fullname').text(parsed['user']['fullName']);
     };
 
-    graph_rendering = function(data) {
+    query_result_rendering = function(data) {
         console.log(data);
-        var parsed = JSON.parse(data);
-        var dataset = parsed['activities-steps'].slice();
-        console.log(dataset);
-        var width = 420, barHeight = 10;
-        var valueFn = function(d) {
-            d.value = +d.value;
-            return d.value;
-        };
-
-        var x = d3.scale.linear()
-                .domain([0, d3.max(dataset, valueFn)])
-                .range([0, width]);
-
-        var chart = d3.select(".chart")
-                .attr("width", width)
-                .attr("height", barHeight * dataset.length);
-
-        var bar = chart.selectAll("g")
-                .data(dataset)
-                .enter().append("g")
-                .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-
-        bar.append("rect")
-                .attr("width", function(d) { return x(d.value); })
-                .attr("height", barHeight - 1);
-
-        bar.append("text")
-                .attr("x", function(d) { return x(d.value) - 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.value+' - '+d.time; });
+        $('.query-result').empty();
+        $('.query-result').append('<p>Latest query: '+new Date().toLocaleString().toString()+'<p>');
+        $('.query-result').append('<pre>'+JSON.stringify(JSON.parse(data), null, 2)+'</pre>');
     };
 
     $(document).ready(function(){
         var user_id         = getParameterByName('user_id');
         var access_secret   = getParameterByName('access_token');
+
         $.get("/user", { access_secret: access_secret, user_id : user_id }, user_rendering);
 
-        $("#btn1").click(function() {
-            console.log('btn1 clicked');
-            var result = $.get("/data", { access_secret: access_secret, user_id : user_id }, graph_rendering);
+        $("#query").click(function() {
+            var path = $('#text').val();
+            console.log('Query path: '+path);
+            var options = {
+                access_secret   : access_secret,
+                user_id         : user_id,
+                path            : path
+            };
+            $.get("/data", options, query_result_rendering);
         });
-
-        $("#btn2").click(function() {
-            console.log('btn2 clicked');
-            var result = $.get("/heartrate", { access_secret: access_secret, user_id : user_id }, graph_rendering);
-        });
-
     });
 
 </script>
-
 
 </html>

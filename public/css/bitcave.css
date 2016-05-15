@@ -1,0 +1,62 @@
+h1 {
+    margin:20px;
+}
+
+.chart rect {
+    fill: steelblue;
+}
+.chart text {
+    fill: white;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+
+.sidebar {
+    position: absolute;
+    left: 0px;
+    width: 150px;
+    height: 100%;
+    border-right: 1px solid grey;
+}
+
+.user-img {
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.user-fullname {
+    text-align: center;
+}
+
+.query-area {
+    position: relative;
+    display:block;
+    margin-left: 150px;
+}
+
+.query-result {
+    margin-left: 150px;
+    display: block;
+    padding: 20px;
+
+}
+
+.query-button-container {
+    height:40px;
+    margin:20px;
+}
+
+.query-examples {
+    margin-left: 150px;
+    margin: 20px;
+}
+
+.query-example {
+    font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+    font-size: 95%;
+    line-height: 140%;
+    min-width:200px;
+    max-width:703px;
+    background: rgba(0,  0,  0, 0.10);
+}
