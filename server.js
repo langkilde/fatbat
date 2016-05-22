@@ -43,7 +43,6 @@ server.get('/bitcave', function(req, res) {
     console.log('BITCAVE : entered bitcave');
     console.log('BITCAVE : user_id      : ',req.query.user_id);
     console.log('BITCAVE : access_token : ',req.query.access_token);
-    
 });
 
 server.get('/auth/fitbit/callback', function(req, res) {
@@ -65,7 +64,7 @@ server.get('/auth/fitbit/callback', function(req, res) {
 var insertToken = function(token, db, callback) {
     console.log('AUTH : attempting to store retrieved token in DB : ', db.s.databaseName);
     var collection = db.collection('users');
-    collection.updateOne({  _id                : token.user_id,
+    collection.updateOne({  _id             : token.user_id,
                             access_token    : token.access_token,
                             expires_in      : token.expires_in,
                             refresh_token   : token.refresh_token,
@@ -101,7 +100,6 @@ function getData(base, path, req_url) {
 }
 
 server.get('/data', function(req, res) {
-    
     console.log('DATA : /data : initiated');
     var user_id         = getParameterByName('user_id', req['url']);
     var path            = getParameterByName('path', req['url']);
@@ -114,7 +112,7 @@ server.get('/data', function(req, res) {
 server.get('/user', function(req, res) {
     console.log('DATA : /user : initiated');
     var user_id = getParameterByName('user_id', req['url']);
-    var base    = 'https://api.fitbit.com/1/user/'+user_id
+    var base    = 'https://api.fitbit.com/1/user/'+user_id;
     var body    = getData(base, '/profile.json', req['url']);
     res.send(body).end();
 });
