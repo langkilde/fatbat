@@ -1,0 +1,46 @@
+@import 'variables';
+
+// tablet
+@media only screen and (min-width: $mobile-width-min) and (max-width: $mobile-width-max) {
+  .mobile-only {
+    display: block !important;
+  }
+
+  .tablet-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+// tablet
+@media only screen and (min-width: $tablet-width-min) and (max-width: $tablet-width-max) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .tablet-only {
+    display: block !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+// desktop
+@media only screen and (min-width: $desktop-width-min) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .tablet-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: block !important;
+  }
+}
