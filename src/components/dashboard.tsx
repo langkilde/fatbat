@@ -5,7 +5,7 @@ export default class App extends React.Component {
   public render() {
     return (
       <div>
-        App
+        Dashboard
       </div>
     );
   }

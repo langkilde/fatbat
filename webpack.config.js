@@ -68,7 +68,7 @@ const webpackConfig = {
     extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"],
   },
   devServer: {
-    https: true,
+    historyApiFallback: true,
     compress: true,
     clientLogLevel: "error",
     port: 8787,
