@@ -1,17 +1,13 @@
 /* eslint-env browser */
 
+import {createBrowserHistory} from "history";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-} from "react-router-dom";
-import {applyMiddleware} from "redux";
-import {createStore} from "redux";
+import {browserHistory} from "react-router";
+import {Link, Route, Router} from "react-router-dom";
+import {applyMiddleware, createStore} from "redux";
 import reduxThunk from "redux-thunk";
-import App from "./components/app";
 import Dashboard from "./components/dashboard";
 import Signin from "./components/signin";
 import reducers from "./reducers";
@@ -21,10 +17,13 @@ import "./style/scss/all.scss";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
+const history = createBrowserHistory();
+
+console.log("stored state", store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <div>
         <Route exact path="/" component={Signin}/>
         <Route path="/dashboard" component={Dashboard}/>

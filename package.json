@@ -77,11 +77,13 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "express": "latest",
     "fitbit-client-oauth2": "^2.0.3",
     "https": "^1.0.0",
     "lodash": "^4.17.4",
     "morgan": "^1.8.2",
     "path": "^0.12.7",
+    "query-string": "^4.3.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
@@ -89,7 +91,6 @@
     "react-router-dom": "^4.1.1",
     "redux": "^3.0.4",
     "redux-form": "^6.8.0",
-    "redux-thunk": "^2.0.1",
-    "express": "latest"
+    "redux-thunk": "^2.0.1"
   }
 }
