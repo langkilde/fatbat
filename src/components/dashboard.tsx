@@ -3,6 +3,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {browserHistory, IInjectedProps} from "react-router";
 import * as actions from "../actions";
+import history from "../history";
 
 interface IDashboard extends IInjectedProps {
   login: (userId: string, token: string) => void;
@@ -18,6 +19,7 @@ class Dashboard extends React.Component<IDashboard, any> {
     console.log("user_id:", params.user_id);
     console.log("token  :", params.access_token);
     this.props.login(params.user_id, params.access_token);
+    history.push("/dashboard");
   }
   
   public render() {

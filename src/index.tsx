@@ -1,6 +1,5 @@
 /* eslint-env browser */
 
-import {createBrowserHistory} from "history";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
@@ -10,6 +9,7 @@ import {applyMiddleware, createStore} from "redux";
 import reduxThunk from "redux-thunk";
 import Dashboard from "./components/dashboard";
 import Signin from "./components/signin";
+import history from "./history";
 import reducers from "./reducers";
 
 import "./assets/images/favicon.ico";
@@ -17,9 +17,9 @@ import "./style/scss/all.scss";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
-const history = createBrowserHistory();
 
 console.log("stored state", store.getState());
+console.log("history", history);
 
 ReactDOM.render(
   <Provider store={store}>
