@@ -4,3 +4,4 @@ node_modules
 configs/fitbit.json
 src/**/*.js*
 build
+package-lock.json
