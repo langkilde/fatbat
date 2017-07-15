@@ -10,5 +10,7 @@ export function login(userId, token) {
       type: "store_fitbit_token",
       userId,
     });
+    localStorage.setItem("fatbatUserId", userId);
+    localStorage.setItem("fatbatToken", token);
   };
 }

@@ -9,7 +9,7 @@ import {applyMiddleware, createStore} from "redux";
 import reduxThunk from "redux-thunk";
 import Dashboard from "./components/dashboard";
 import Signin from "./components/signin";
-import history from "./history";
+import history from "./historyCreator";
 import reducers from "./reducers";
 
 import "./assets/images/favicon.ico";
