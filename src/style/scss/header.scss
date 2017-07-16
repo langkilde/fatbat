@@ -1,0 +1,34 @@
+@import 'variables';
+
+div.header {
+  background: $primary-color;
+  color: white;
+  border: 1px solid $primary-color;
+  margin: 0 auto;
+  padding-left: 20px;
+  overflow: hidden;
+}
+
+.header-title {
+  float: left;
+}
+
+.header-profile-name {
+  font-weight: 500;
+  margin-right: 20px;
+  float: left;
+}
+
+.header-profile-avatar {
+  border-radius: 100%;
+}
+
+a.header-profile-link {
+  color: white;
+  text-decoration: none;
+}
+
+div.profile {
+  padding: 10px;
+  float: right;
+}
