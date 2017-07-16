@@ -37,8 +37,8 @@ class Dashboard extends React.Component<IDashboard, any> {
     console.log("localstorage userId", localUserId);
     const localToken = localStorage.getItem("fatbatToken");
     console.log("localstorage token", localToken);
-  
-    axios.get("http://localhost:4000/api?userId=apa&token=bepa&query=cepa")
+    const query = "1/user/" + localUserId + "/activities/date/2017-06-01.json";
+    axios.get("http://localhost:4000/api?token=" + localToken + "&query=" + query)
       .then((response) => {
         console.log("response", response);
       })
