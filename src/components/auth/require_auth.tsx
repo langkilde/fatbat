@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import history from "../../historyCreator";
 
-export default function (ComposedComponent) {
+export default function(ComposedComponent) {
   
   interface IAuthenticated {
     authenticated: boolean;

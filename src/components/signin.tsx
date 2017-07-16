@@ -1,7 +1,7 @@
-import {bindActionCreators} from "redux";
 import * as React from "react";
 import {connect} from "react-redux";
 import {browserHistory, IInjectedProps} from "react-router";
+import {bindActionCreators} from "redux";
 import {login} from "../actions/index";
 import history from "../historyCreator";
 const queryString = require("query-string");
