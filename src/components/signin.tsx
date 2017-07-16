@@ -41,8 +41,8 @@ class Signin extends React.Component<ISignin, any> {
     
     return (
       <div>
-        <form className="" action="http://localhost:3000/auth">
-          <button className="" type="submit">Sign in</button>
+        <form className="signin" action="http://localhost:3000/auth">
+          <button className="signin-button" type="submit">Sign in</button>
         </form>
       </div>
     );
