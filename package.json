@@ -82,6 +82,7 @@
     "fitbit-client-oauth2": "^2.0.3",
     "history": "^4.6.3",
     "https": "^1.0.0",
+    "influx": "^5.0.7",
     "lodash": "^4.17.4",
     "morgan": "^1.8.2",
     "path": "^0.12.7",

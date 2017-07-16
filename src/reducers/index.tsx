@@ -1,23 +1,26 @@
 import {combineReducers} from "redux";
-import {STORE_FITBIT_TOKEN} from "../actions/types";
+import {LOGIN} from "../actions/types";
 
-function storeFitbitToken(state = {}, action) {
-  console.log("reducing action ", action);
-  console.log("state before", state);
+function logReducer(state = {}, action) {
+  console.log("reducer action type:", action.type);
+  
+  return state;
+}
+
+function loginReducer(state = {}, action) {
   switch (action.type) {
-    case STORE_FITBIT_TOKEN:
-      console.log("received store fitbit token action in reducer");
-      const newState = {...state, token: action.token, userId: action.userId};
-      console.log("newState", newState);
-      
-      return newState;
+    case LOGIN:
+      console.log("received login in reducer");
+    
+      return {...state, authenticated: true, token: action.token, userId: action.userId};
     default:
       return state;
   }
 }
 
 const rootReducers = combineReducers({
-  login: storeFitbitToken,
+  auth: loginReducer,
+  log: logReducer,
 });
 
 export default rootReducers;

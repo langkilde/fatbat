@@ -23,7 +23,10 @@ server.get('/auth/fitbit/callback', function (req, res) {
   const code = req.query.code;
   fitbitClient.getToken(code, redirect_uri).then(function (token) {
     console.log('token', token);
-    res.redirect('http://localhost:8787/dashboard?user_id=' + token.token.user_id + '&access_token=' + token.token.access_token);
+    res.redirect(
+      'http://localhost:8787/?' +
+      'access_token=' + token.token.access_token +
+      '&user_id=' + token.token.user_id);
   });
 });
 

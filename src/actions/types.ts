@@ -1,1 +1,3 @@
-export const STORE_FITBIT_TOKEN = "store_fitbit_token";
+export const LOGIN = "login";
+export const COOKIE_USER_ID = "fatbat_userId";
+export const COOKIE_TOKEN = "fatbat_token";

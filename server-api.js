@@ -23,7 +23,7 @@ server.get('/api', function (req, res) {
   
   const instance = axios.create({
     baseURL: "https://api.fitbit.com/",
-    timeout: 1000,
+    timeout: 5000,
     headers: {"Authorization": "Bearer " + req.query.token}
   });
   
