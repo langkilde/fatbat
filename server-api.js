@@ -8,11 +8,8 @@ const cors = require('cors');
 const axios = require('axios');
 
 server.use(cors({
-  'allowedHeaders': ['sessionId', 'Content-Type'],
-  'exposedHeaders': ['sessionId'],
   'origin': 'http://localhost:8787',
   'methods': 'GET',
-  'preflightContinue': false
 }));
 
 server.options('*', cors());
