@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {browserHistory, IInjectedProps} from "react-router";
-import Header from "./header";
+import Header from "./header/header";
 
 interface IApplicationContainer extends IInjectedProps {
   authenticated: boolean;

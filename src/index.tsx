@@ -7,7 +7,7 @@ import {browserHistory} from "react-router";
 import {Link, Route, Router} from "react-router-dom";
 import {applyMiddleware, createStore} from "redux";
 import reduxThunk from "redux-thunk";
-import {COOKIE_TOKEN, COOKIE_USER_ID, LOGIN} from "./actions/types";
+import {COOKIE_TOKEN, COOKIE_USER_ID, LOGIN} from "./actions/actionTypes";
 import App from "./components/app";
 import RequireAuth from "./components/auth/require_auth";
 import Signin from "./components/signin";

@@ -1,4 +1,4 @@
-import {TOGGLE_MENU} from "./types";
+import {TOGGLE_MENU} from "./actionTypes";
 
 export function toggleMenu(isActive) {
   return (dispatch) => {

@@ -1,4 +1,4 @@
-import {TOGGLE_MENU} from "../actions/types";
+import {TOGGLE_MENU} from "../actions/actionTypes";
 
 export function menuReducer(state = {}, action) {
   switch (action.type) {

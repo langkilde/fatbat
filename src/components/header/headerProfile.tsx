@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {browserHistory, IInjectedProps} from "react-router";
 import {bindActionCreators} from "redux";
-import {fetchProfile} from "../actions/index";
+import {fetchProfile} from "../../actions/index";
 
 interface IProfile extends IInjectedProps {
   avatar640: string;

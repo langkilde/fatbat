@@ -1,4 +1,4 @@
-import {LOGIN} from "../actions/types";
+import {LOGIN} from "../actions/actionTypes";
 
 export function loginReducer(state = {}, action) {
   switch (action.type) {

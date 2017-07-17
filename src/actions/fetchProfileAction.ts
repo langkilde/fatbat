@@ -1,5 +1,5 @@
 import axios from "axios";
-import {COOKIE_TOKEN, COOKIE_USER_ID, FETCHED_PROFILE} from "./types";
+import {COOKIE_TOKEN, COOKIE_USER_ID, FETCHED_PROFILE} from "./actionTypes";
 
 export function fetchProfile() {
   return (dispatch) => {

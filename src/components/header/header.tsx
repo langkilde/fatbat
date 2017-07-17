@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import Menu from "./menu";
-import Profile from "./profile";
+import Menu from "./headerMenu";
+import Profile from "./headerProfile";
 
 class Header extends React.Component {
   

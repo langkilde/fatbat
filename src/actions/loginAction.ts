@@ -1,4 +1,4 @@
-import {COOKIE_TOKEN, COOKIE_USER_ID, LOGIN} from "./types";
+import {COOKIE_TOKEN, COOKIE_USER_ID, LOGIN} from "./actionTypes";
 
 export function login(userId, token) {
   return (dispatch) => {

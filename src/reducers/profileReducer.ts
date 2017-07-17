@@ -1,4 +1,4 @@
-import {FETCHED_PROFILE} from "../actions/types";
+import {FETCHED_PROFILE} from "../actions/actionTypes";
 
 export function profileReducer(state = {}, actions) {
   switch (actions.type) {
