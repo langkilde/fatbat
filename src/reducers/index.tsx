@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import {todayReducer} from "./dataReducers/todayReducer";
 import {loginReducer} from "./loginReducer";
 import {menuReducer} from "./menuReducer";
 import {profileReducer} from "./profileReducer";
@@ -11,6 +12,7 @@ function logReducer(state = {}, action) {
 
 const rootReducers = combineReducers({
   auth: loginReducer,
+  data: todayReducer,
   log: logReducer,
   menu: menuReducer,
   profile: profileReducer,

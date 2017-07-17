@@ -31,8 +31,6 @@ if (token && userId) {
   });
 }
 
-console.log("initial state", store.getState());
-
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>

@@ -2,7 +2,6 @@ import {COOKIE_TOKEN, COOKIE_USER_ID, LOGIN} from "./actionTypes";
 
 export function login(userId, token) {
   return (dispatch) => {
-    console.log("dispatching login action");
     dispatch({
       authenticated: true,
       token,
