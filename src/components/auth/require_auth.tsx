@@ -10,10 +10,6 @@ export default function(ComposedComponent) {
   
   class Authentication extends React.Component<IAuthenticated, any> {
     
-    public static contextTypes = {
-      router: React.PropTypes.object,
-    };
-    
     public render() {
       return <ComposedComponent {...this.props} />;
     }

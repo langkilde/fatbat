@@ -1,9 +1,15 @@
 @import 'header';
 @import 'login';
 @import 'variables';
+@import 'menu/menu.scss';
+@import 'menu/header-menu.scss';
 
 html,
 body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
+}
+
+*:focus {
+  outline: none;
 }

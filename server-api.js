@@ -24,22 +24,41 @@ server.get('/api', function (req, res) {
     headers: {"Authorization": "Bearer " + req.query.token}
   });
   
-  console.log("received call to fitbit api", req.query);
   instance.get(req.query.query)
     .then((response) => {
-      console.log("request to fitbit api succeeded");
-      if (response.data) {
-        console.log("reponse.data :", response.data);
-        res.status(200).send(response.data);
-      } else {
-        res.status(404).send("no data");
-      }
+      handleResponse(response, res);
     })
     .catch((error) => {
-      console.log("request to fitbit api failed : ", error);
-      res.status(500).send("request to fitbit api failed : " + error);
+      handleError(error, req, res);
     });
 });
+
+function refreshToken(oldToken) {
+  console.log("refreshing token");
+  axios.get("http://localhost:3000/refreshToken?token=" + oldToken)
+    .then((newToken) => {
+      console.log("newToken", newToken);
+      return newToken;
+  });
+}
+
+function handleError(error, req, res) {
+  if (error.response.status === 401) {
+    if (req.query.refreshToken) {
+      const newToken = refreshToken(req.query.token);
+    } else {
+      res.status(401).send("unauthorized");
+    }
+  }
+}
+
+function handleResponse(response, res) {
+  if (response.data) {
+    res.status(200).send(response.data);
+  } else {
+    res.status(404).send("no data");
+  }
+}
 
 const PORT = 4000;
 server.listen(PORT, () => console.log('listening to port', PORT));

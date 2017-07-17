@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import {loginReducer} from "./loginReducer";
+import {menuReducer} from "./menuReducer";
 import {profileReducer} from "./profileReducer";
 
 function logReducer(state = {}, action) {
@@ -11,6 +12,7 @@ function logReducer(state = {}, action) {
 const rootReducers = combineReducers({
   auth: loginReducer,
   log: logReducer,
+  menu: menuReducer,
   profile: profileReducer,
 });
 

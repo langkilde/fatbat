@@ -6,7 +6,10 @@ export function fetchProfile() {
     console.log("fetching profile");
     const token = localStorage.getItem(COOKIE_TOKEN);
     const userId = localStorage.getItem(COOKIE_USER_ID);
-    axios.get("http://localhost:4000/api?token=" + token + "&query=1/user/" + userId + "/profile.json")
+    const apiUrl = "http://localhost:4000/api";
+    const query = "?token=" + token + "&refreshToken=true&query=1/user/" + userId + "/profile.json";
+    const fullUrl = apiUrl + query;
+    axios.get(fullUrl)
       .then((response) => {
         console.log(response);
         dispatch({

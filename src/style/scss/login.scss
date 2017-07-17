@@ -1,9 +1,44 @@
 @import 'variables';
 
 .signin {
-  border: 1px solid black;
+  margin: 30% auto;
+  width: 30%;
+}
+
+.signin-title {
+  text-align: center;
+  color: #777;
+}
+
+.signin-form {
+  text-align: center;
 }
 
 .signin-button {
-  border: 1px solid black;
+  border: 1px solid transparent;
+  background: $primary-color;
+  color: white;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px grey;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.signin-button:focus {
+  outline: none;
+}
+
+.signin-button:active {
+  text-decoration: none;
+}
+
+.signin-button:hover {
+  background-color: $secondary-color;
 }

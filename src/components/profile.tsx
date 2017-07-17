@@ -21,16 +21,16 @@ class Profile extends React.Component<IProfile, any> {
   public render() {
     const userId = this.props.userId;
     const profileUrl = "https://www.fitbit.com/user/" + userId;
+    const userName = this.props.fullName || "loading...";
     
     return (
       <div className="profile">
         <a className="header-profile-link" href={profileUrl} target="_blank">
-          <p className="header-profile-name">{this.props.fullName}</p>
+          <p className="header-profile-name">{userName}</p>
           <img className="header-profile-avatar" src={this.props.avatar640} height="50px"/>
-      </a>
-  </div>
-  )
-    ;
+        </a>
+      </div>
+    );
   }
 }
 

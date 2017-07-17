@@ -2,7 +2,6 @@
 
 div.header {
   background: $primary-color;
-  color: white;
   border: 1px solid $primary-color;
   margin: 0 auto;
   padding-left: 20px;
@@ -10,12 +9,16 @@ div.header {
 }
 
 .header-title {
+  color: $tertiary-color;
+  margin-top: 16px;
   float: left;
 }
 
 .header-profile-name {
+  color: white;
   font-weight: 500;
   margin-right: 20px;
+  margin-top: 16px;
   float: left;
 }
 

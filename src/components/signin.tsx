@@ -40,8 +40,9 @@ class Signin extends React.Component<ISignin, any> {
     console.log("rendering signin");
     
     return (
-      <div>
-        <form className="signin" action="http://localhost:3000/auth">
+      <div className="signin">
+        <h1 className="signin-title">Fatbat</h1>
+        <form className="signin-form" action="http://localhost:3000/auth">
           <button className="signin-button" type="submit">Sign in</button>
         </form>
       </div>
