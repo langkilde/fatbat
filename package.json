@@ -76,14 +76,15 @@
     "webpack-dev-middleware": "latest"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "axios": "^0.16.2",
     "cors": "^2.8.4",
     "express": "latest",
     "fitbit-client-oauth2": "^2.0.3",
     "history": "^4.6.3",
     "https": "^1.0.0",
-    "influx": "^5.0.7",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "morgan": "^1.8.2",
     "path": "^0.12.7",
     "query-string": "^4.3.4",
