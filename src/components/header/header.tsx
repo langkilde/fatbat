@@ -1,7 +1,9 @@
 import * as React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import Menu from "./headerMenu";
 import Profile from "./headerProfile";
+
 
 class Header extends React.Component {
   
@@ -9,7 +11,7 @@ class Header extends React.Component {
     return (
       <div className="header-container">
         <div className="header">
-          <h1 className="header-title">Fatbat</h1>
+          <Link to="/"><h1 className="header-title">FATBAT</h1></Link>
           <Menu active="false"/>
           <Profile/>
         </div>

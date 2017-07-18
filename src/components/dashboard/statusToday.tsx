@@ -24,6 +24,8 @@ class StatusToday extends React.Component<IStatusToday, any> {
   }
   
   public render() {
+    console.log(this.props.heartIntradayToday);
+    
     return (
       <div>
         some data from today coming soon!
