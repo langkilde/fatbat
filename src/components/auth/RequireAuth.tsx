@@ -4,11 +4,11 @@ import history from "../../historyCreator";
 
 export default function(ComposedComponent) {
   
-  interface IAuthenticated {
+  interface IRequireAuth {
     authenticated: boolean;
   }
   
-  class Authentication extends React.Component<IAuthenticated, any> {
+  class RequireAuth extends React.Component<IRequireAuth, any> {
     
     public render() {
       return <ComposedComponent {...this.props} />;
@@ -32,5 +32,5 @@ export default function(ComposedComponent) {
     return {authenticated: state.auth.authenticated};
   }
   
-  return connect(mapStateToProps)(Authentication);
+  return connect(mapStateToProps)(RequireAuth);
 }

@@ -1,8 +1,8 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import Menu from "./headerMenu";
-import Profile from "./headerProfile";
+import Menu from "./HeaderMenu";
+import Profile from "./HeaderProfile";
 
 
 class Header extends React.Component {

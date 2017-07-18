@@ -3,13 +3,13 @@ import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
 import {toggleMenu} from "../../actions/toggleMenuAction";
 
-interface IMenu {
+interface IHeaderMenu {
   active: string;
   toggleMenu: (menuIsActive: boolean) => void;
   toggleMenuState: () => void;
 }
 
-class Menu extends React.Component<IMenu, any> {
+class HeaderMenu extends React.Component<IHeaderMenu, any> {
   
   constructor(props) {
     super(props);
@@ -56,4 +56,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Menu);
+)(HeaderMenu);

@@ -1,6 +1,6 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import StatusToday from "./statusToday";
+import StatusToday from "./StatusToday";
 
 class Dashboard extends React.Component {
   

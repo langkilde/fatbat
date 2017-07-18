@@ -1,8 +1,8 @@
 import * as React from "react";
 import {connect} from "react-redux";
 import {browserHistory, IInjectedProps} from "react-router";
-import Dashboard from "./dashboard/dashboard";
-import Header from "./header/header";
+import Dashboard from "./dashboard/Dashboard";
+import Header from "./header/Header";
 
 interface IApplicationContainer extends IInjectedProps {
   authenticated: boolean;
@@ -10,7 +10,7 @@ interface IApplicationContainer extends IInjectedProps {
   userId: string;
 }
 
-class ApplicationContainer extends React.Component<IApplicationContainer, any> {
+class App extends React.Component<IApplicationContainer, any> {
   
   public render() {
     return (
@@ -32,4 +32,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   null,
-)(ApplicationContainer);
+)(App);

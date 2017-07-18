@@ -12,7 +12,7 @@ interface IProfile extends IInjectedProps {
   fullName: string;
 }
 
-class Profile extends React.Component<IProfile, any> {
+class HeaderProfile extends React.Component<IProfile, any> {
   
   public componentWillMount() {
     this.props.fetchProfile();
@@ -48,4 +48,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Profile);
+)(HeaderProfile);
