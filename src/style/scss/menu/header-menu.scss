@@ -1,5 +1,23 @@
 .header-menu {
-  margin-top: 9px;
-  margin-right: 8px;
+  padding: 26px;
   float: right;
+}
+
+$transition-duration: 0.1s;
+
+.menu-dropdown-content {
+  visibility: hidden;
+  position: relative;
+  float: right;
+  z-index: 1;
+  padding: 3px 30px;
+  background: $tertiary-color;
+  -webkit-transition: visibility $transition-duration, opacity $transition-duration linear;
+  transition: visibility $transition-duration, opacity $transition-duration linear;
+  opacity: 0;
+}
+
+.dropdown-is-active {
+  visibility: visible;
+  opacity: 1;
 }

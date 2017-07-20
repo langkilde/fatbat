@@ -4,7 +4,7 @@ import {bindActionCreators} from "redux";
 import {toggleMenu} from "../../actions/toggleMenuAction";
 
 interface IHeaderMenu {
-  active: string;
+  active: boolean;
   toggleMenu: (menuIsActive: boolean) => void;
   toggleMenuState: () => void;
 }
@@ -32,7 +32,7 @@ class HeaderMenu extends React.Component<IHeaderMenu, any> {
   }
   
   public toggleMenuState() {
-    if (this.props.active === "true") {
+    if (this.props.active === true) {
       this.props.toggleMenu(true);
     } else if (this.props.active) {
       this.props.toggleMenu(true);

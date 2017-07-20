@@ -15,7 +15,7 @@ class App extends React.Component<IApplicationContainer, any> {
   public render() {
     return (
       <div>
-        <Header/>
+        <Header active={false}/>
         <Dashboard/>
       </div>
     );
