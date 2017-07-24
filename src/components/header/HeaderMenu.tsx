@@ -1,24 +1,31 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
-import {toggleMenu} from "../../actions/toggleMenuAction";
+import * as redux from "redux";
+import {Action, toggleMenu} from "../../actions/index";
+import {Store} from "../../store/store";
 
-interface IHeaderMenu {
-  active: boolean;
-  toggleMenu: (menuIsActive: boolean) => void;
-  toggleMenuState: () => void;
+interface IOwnProps {
+  isActive: boolean;
 }
 
-class HeaderMenu extends React.Component<IHeaderMenu, any> {
+interface IConnectedState {
+  isActive: boolean;
+}
+
+interface IConnectedDispatch {
+  toggleMenu: (isActive: boolean) => Action;
+}
+
+class HeaderMenu extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, any> {
   
-  constructor(props) {
+  constructor(props: IOwnProps & IConnectedState & IConnectedDispatch) {
     super(props);
     this.toggleMenuState = this.toggleMenuState.bind(this);
   }
   
   public render() {
     let buttonClass = "hamburger hamburger--collapse header-menu";
-    if (this.props.active) {
+    if (this.props.isActive) {
       buttonClass += " is-active";
     }
     
@@ -32,9 +39,9 @@ class HeaderMenu extends React.Component<IHeaderMenu, any> {
   }
   
   public toggleMenuState() {
-    if (this.props.active === true) {
+    if (this.props.isActive === true) {
       this.props.toggleMenu(true);
-    } else if (this.props.active) {
+    } else if (this.props.isActive) {
       this.props.toggleMenu(true);
     } else {
       this.props.toggleMenu(false);
@@ -43,15 +50,12 @@ class HeaderMenu extends React.Component<IHeaderMenu, any> {
   
 }
 
-function mapStateToProps(state) {
-  return {
-    active: state.menu.active,
-  };
-}
+const mapStateToProps = (state: Store.All, ownProps: {}): IConnectedState => ({
+  isActive: state.menu.isActive,
+});
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({toggleMenu}, dispatch);
-}
+const mapDispatchToProps = (dispatch: redux.Dispatch<Store.All>): IConnectedDispatch => ({
+  toggleMenu: (isActive: boolean) => dispatch(toggleMenu(isActive))});
 
 export default connect(
   mapStateToProps,

@@ -1,18 +1,15 @@
 {
   "defaultSeverity": "error",
   "extends": [
-    "tslint:recommended"
+    "tslint:recommended",
+    "tslint-react"
   ],
   "jsRules": {},
   "rules": {
     "no-trailing-whitespace": false,
     "no-var-requires": false,
     "newline-before-return": true,
-    "no-consecutive-blank-lines": [
-      true,
-      3
-    ],
-    "no-console": false
+    "no-consecutive-blank-lines": [true, 3]
   },
   "rulesDirectory": []
 }

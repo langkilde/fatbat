@@ -1,17 +1,19 @@
 import * as React from "react";
-import {connect} from "react-redux";
+import * as ReactRedux from "react-redux";
 import history from "../../historyCreator";
 
-export default function(ComposedComponent) {
+export interface IRequireAuthProps {
+  authenticated: boolean;
+}
+
+type HOC<PWrapped, PHoc> = React.ComponentClass<PWrapped & PHoc> | React.SFC<PWrapped & PHoc>;
+
+export function requireAuth<P, StateProps>(Component: HOC<P, IRequireAuthProps>): React.ComponentClass<P> {
   
-  interface IRequireAuth {
-    authenticated: boolean;
-  }
-  
-  class RequireAuth extends React.Component<IRequireAuth, any> {
+  class C extends React.Component<P & ReactRedux.DispatchProp<any> & IRequireAuthProps> {
     
-    public render() {
-      return <ComposedComponent {...this.props} />;
+    public render(): JSX.Element {
+      return <Component authenticated={this.props.authenticated} {...this.state} />;
     }
     
     public componentWillMount() {
@@ -20,17 +22,16 @@ export default function(ComposedComponent) {
       }
     }
     
-    public componentWillUpdate(nextProps) {
-      if (!nextProps.authenticated) {
-        history.push("/");
-      }
-    }
-    
   }
   
-  function mapStateToProps(state) {
-    return {authenticated: state.auth.authenticated};
+  function mapStateToProps(state: any, ownProps: P): IRequireAuthProps {
+    return {
+      authenticated: state.login.authenticated,
+    };
   }
   
-  return connect(mapStateToProps)(RequireAuth);
+  return ReactRedux.connect(mapStateToProps)(C);
+  
 }
+
+export default requireAuth;

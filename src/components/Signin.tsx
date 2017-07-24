@@ -1,44 +1,42 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {browserHistory, IInjectedProps} from "react-router";
-import {bindActionCreators} from "redux";
-import {login} from "../actions/index";
+import {Dispatch} from "redux";
+import {Action, login} from "../actions/index";
 import history from "../historyCreator";
+import {Store} from "../store/store";
+
 const queryString = require("query-string");
 
-interface ISignin extends IInjectedProps {
-  authenticated: boolean;
-  login: (userId: string, token: string) => boolean;
-  location: string;
-  token: string;
-  userId: string;
+interface IOwnProps {
+  location: {
+    search: string;
+  };
 }
 
-class Signin extends React.Component<ISignin, any> {
+interface IConnectedState {
+  authenticated: boolean;
+}
+
+interface IConnectedDispatch {
+  login: (userId: string, token: string) => Dispatch<Action>;
+}
+
+class SigninComponent extends React.Component<IConnectedState & IConnectedDispatch & IOwnProps, {}> {
   
   public componentWillMount() {
-    console.log("mounting signin");
-    console.log("signin token", this.props.token);
-    console.log("signin userId", this.props.userId);
     
     if (this.props.location.search) {
-      console.log("signing in using query params");
       const params = queryString.parse(this.props.location.search);
-      console.log("userId :", params.user_id);
-      console.log("token  :", params.access_token);
       this.props.login(params.user_id, params.access_token);
       history.push("/app");
     }
     
     if (this.props.authenticated) {
-      console.log("already signed in, over to app");
       history.push("/app");
     }
   }
   
   public render() {
-    console.log("rendering signin");
-    
     return (
       <div className="signin">
         <h1 className="signin-title">Fatbat</h1>
@@ -50,20 +48,11 @@ class Signin extends React.Component<ISignin, any> {
   }
 }
 
-function mapStateToProps(state) {
-  
-  return {
-    authenticated: state.auth.authenticated,
-    token: state.auth.token,
-    userId: state.auth.userId,
-  };
-}
+const mapStateToProps = (state: Store.All, ownProps: IOwnProps): IConnectedState => ({
+  authenticated: state.login.authenticated,
+});
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({login}, dispatch);
-}
+const mapDispatchToProps = (dispatch: Dispatch<Store.All>): IConnectedDispatch => ({
+  login: (userId: string, token: string) => dispatch(login(userId, token))});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Signin);
+export const Signin: React.ComponentClass<IOwnProps> = connect(mapStateToProps, mapDispatchToProps)(SigninComponent);

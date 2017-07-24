@@ -8,7 +8,7 @@ const cors = require('cors');
 const axios = require('axios');
 
 server.use(cors({
-  'origin': 'http://localhost:8787',
+  'origin': 'http://localhost:8080',
   'methods': 'GET',
 }));
 
@@ -39,7 +39,7 @@ function refreshToken(oldToken) {
     .then((newToken) => {
       console.log("newToken", newToken);
       return newToken;
-  });
+    });
 }
 
 function handleError(error, req, res) {

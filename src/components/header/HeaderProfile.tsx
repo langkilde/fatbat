@@ -1,49 +1,55 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {browserHistory, IInjectedProps} from "react-router";
-import {bindActionCreators} from "redux";
-import {fetchProfile} from "../../actions/index";
+import {Dispatch} from "redux";
+import {Action, fetchProfile} from "../../actions/index";
+import {Store} from "../../store/store";
 
-interface IProfile extends IInjectedProps {
-  avatar640: string;
-  fetchProfile: () => void;
-  token: string;
-  userId: string;
-  fullName: string;
+interface IConnectedState {
+  avatar: string;
+  name: string;
+  token?: string;
+  userId?: string;
 }
 
-class HeaderProfile extends React.Component<IProfile, any> {
+interface IConnectedDispatch {
+  fetchProfile: (userId: string, token: string) => Action;
+}
+
+class HeaderProfile extends React.Component<{} & IConnectedState & IConnectedDispatch, {}> {
   
   public componentWillMount() {
-    this.props.fetchProfile();
+    console.log("mounting header profile");
+    
+    if (this.props.userId && this.props.token) {
+      this.props.fetchProfile(this.props.userId, this.props.token);
+    }
   }
   
   public render() {
     const userId = this.props.userId;
     const profileUrl = "https://www.fitbit.com/user/" + userId;
-    const userName = this.props.fullName || "loading...";
+    const userName = this.props.name;
     
     return (
       <div className="profile">
         <a className="header-profile-link" href={profileUrl} target="_blank">
           <p className="header-profile-name">{userName}</p>
-          <img className="header-profile-avatar" src={this.props.avatar640} height="50px"/>
+          <img className="header-profile-avatar" src={this.props.avatar} height="50px"/>
         </a>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    ...state.profile,
-    userId: state.auth.userId,
-  };
-}
+const mapStateToProps = (state: Store.All, ownProps: {}): IConnectedState => ({
+  avatar: state.profile.avatar,
+  name: state.profile.name,
+  token: state.login.token,
+  userId: state.login.userId,
+});
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchProfile}, dispatch);
-}
+const mapDispatchToProps = (dispatch: Dispatch<Store.All>): IConnectedDispatch => ({
+  fetchProfile: (userId: string, token: string) => dispatch(fetchProfile(userId, token))});
 
 export default connect(
   mapStateToProps,
