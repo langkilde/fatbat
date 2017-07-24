@@ -5,8 +5,6 @@ import {Store} from "../../store/store";
 import HeaderMenu from "./HeaderMenu";
 import HeaderProfile from "./HeaderProfile";
 
-// import Profile from "./HeaderProfile";
-
 interface IOwnProps {
   isActive: boolean;
 }
