@@ -36,8 +36,7 @@ export function toggleMenu(isActive: boolean): Dispatch<Action> {
 
 export function fetchProfile(userId: string, token: string): Dispatch<Action> {
   return (dispatch: Dispatch<Action>) => {
-    console.log("fetching profile");
-    const apiUrl = "http://localhost:4000/api";
+    const apiUrl = "http://localhost:3000/api";
     const query = "?token=" + token + "&refreshToken=true&query=1/user/" + userId + "/profile.json";
     const fullUrl = apiUrl + query;
     axios.get(fullUrl)

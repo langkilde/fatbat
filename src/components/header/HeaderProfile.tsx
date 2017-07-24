@@ -18,8 +18,6 @@ interface IConnectedDispatch {
 class HeaderProfile extends React.Component<{} & IConnectedState & IConnectedDispatch, {}> {
   
   public componentWillMount() {
-    console.log("mounting header profile");
-    
     if (this.props.userId && this.props.token) {
       this.props.fetchProfile(this.props.userId, this.props.token);
     }

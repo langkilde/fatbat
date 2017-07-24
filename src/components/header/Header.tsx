@@ -47,7 +47,6 @@ class Header extends React.Component<IOwnProps & IConnectedState & {}, any> {
   
   public render() {
     const MENU_DROPDOWN = Header.getMenuDropdown(this.props.isActive);
-    console.log("rendering header");
     
     return (
       <div className="header-container">
