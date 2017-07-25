@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== 'production') {
   console.log('starting dev server');
   const webpackDevMiddleware = require("webpackdevmiddleware");
   const webpack = require("webpack");
-  const webpackConfig = require("./webpack.config.js");
+  const webpackConfig = require("./webpack.config.ts");
   server.use(webpackDevMiddleware(webpack(webpackConfig)));
   server.use(webpackDevMiddleware(webpack(webpackConfig)));
 } else {

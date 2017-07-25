@@ -11,4 +11,5 @@ node_modules
 configs/fitbit.json
 build
 .DS_Store
-**/*.js
+src/**/*.js
+configs/**/*.js

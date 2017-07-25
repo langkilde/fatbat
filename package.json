@@ -8,12 +8,12 @@
   "main": "build/app.js",
   "scripts": {
     "clean": "rimraf build",
-    "build": "yarn run clean && node ./node_modules/webpack/bin/webpack.js -p --config configs/webpack.config.js --env.build --env.sourceMap",
-    "build:dash": "yarn run clean && webpack-dashboard -- webpack -p --config configs/webpack.config.js --env.build --env.sourceMap",
-    "dev": "webpack-dev-server --config configs/webpack.config.js",
-    "dev:open": "webpack-dev-server --config configs/webpack.config.js --open",
-    "dev:dash": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.js --open",
-    "dev2": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.js --open --env.awesome",
+    "build": "yarn run clean && node ./node_modules/webpack/bin/webpack.ts -p --config configs/webpack.config.ts --env.build --env.sourceMap",
+    "build:dash": "yarn run clean && webpack-dashboard -- webpack -p --config configs/webpack.config.ts --env.build --env.sourceMap",
+    "dev": "webpack-dev-server --config configs/webpack.config.ts",
+    "dev:open": "webpack-dev-server --config configs/webpack.config.ts --open",
+    "dev:dash": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.ts --open",
+    "dev2": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.ts --open --env.awesome",
     "lint": "tslint --project tsconfig.json && echo \"running stylelint\" &&./node_modules/stylelint/bin/stylelint.js \"src/**/*.scss\"",
     "tsc": "tsc -p .",
     "tsc:watch": "tsc -p . --noEmit -w",
@@ -37,6 +37,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "ts-node": "^3.3.0",
     "tslib": "^1.7.1"
   },
   "devDependencies": {
