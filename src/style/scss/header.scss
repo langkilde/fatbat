@@ -2,7 +2,7 @@
 
 div.header {
   background: $primary-color;
-  padding-left: 20px;
+  padding-left: 10%;
   overflow: hidden;
   margin: 0;
 }
@@ -35,9 +35,9 @@ div.header {
   border: 2px solid $background-middle;
   box-shadow: 1px 1px 10px #aaa;
   opacity: 1;
-  -webkit-transform: scale(1.05);
-  -ms-transform: scale(1.05);
-  transform: scale(1.05);
+  //-webkit-transform: scale(1.05);
+  //-ms-transform: scale(1.05);
+  //transform: scale(1.05);
 }
 
 div.profile {
