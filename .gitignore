@@ -10,3 +10,4 @@ node_modules
 .idea
 configs/fitbit.json
 build
+.DS_Store
