@@ -30,7 +30,7 @@ class HeaderProfile extends React.Component<{} & IConnectedState & IConnectedDis
     
     return (
       <div className="profile">
-        <p className="header-profile-name">{userName}</p>
+        <p className="header-profile-name desktop-only">{userName}</p>
         <a className="header-profile-link" href={profileUrl} target="_blank">
           <img className="header-profile-avatar" src={this.props.avatar} height="50px"/>
         </a>
