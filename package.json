@@ -11,6 +11,8 @@
     "build": "yarn run clean && node ./node_modules/webpack/bin/webpack.ts -p --config configs/webpack.config.ts --env.build --env.sourceMap",
     "build:dash": "yarn run clean && webpack-dashboard -- webpack -p --config configs/webpack.config.ts --env.build --env.sourceMap",
     "dev": "webpack-dev-server --config configs/webpack.config.ts",
+    "server:auth" : "NODE_ENV=production node server-authentication.js",
+    "server:api" : "NODE_ENV=production node server-api.js",
     "dev:open": "webpack-dev-server --config configs/webpack.config.ts --open",
     "dev:dash": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.ts --open",
     "dev2": "webpack-dashboard -m -- webpack-dev-server --config configs/webpack.config.ts --open --env.awesome",
