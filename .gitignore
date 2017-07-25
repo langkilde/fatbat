@@ -13,3 +13,4 @@ build
 .DS_Store
 src/**/*.js
 configs/**/*.js
+server*.js
