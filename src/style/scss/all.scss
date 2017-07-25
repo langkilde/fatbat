@@ -8,8 +8,9 @@
 html,
 body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-  background-color: white;
+  background-color: $background-middle;
   margin: 0;
+  padding: 0;
 }
 
 *:focus {

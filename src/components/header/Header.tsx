@@ -49,7 +49,7 @@ class Header extends React.Component<IOwnProps & IConnectedState & {}, any> {
     return (
       <div className="header-container">
         <div className="header">
-          <Link to="/"><h1 className="header-title">FATBAT</h1></Link>
+          <Link to="/"><h1 className="header-title">Fatbat</h1></Link>
           <HeaderMenu />
           <HeaderProfile/>
         </div>

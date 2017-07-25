@@ -42,6 +42,8 @@ class SigninComponent extends React.Component<IConnectedState & IConnectedDispat
         <h1 className="signin-title">Fatbat</h1>
         <form className="signin-form" action="http://localhost:3000/auth">
           <button className="signin-button" type="submit">Sign in</button>
+          <p className="signin-info">Will redirect to fitbit for authentication.</p>
+          <p className="signin-info">Fatbat does not store your credentials, only your oAuth token.</p>
         </form>
       </div>
     );

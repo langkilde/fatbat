@@ -1,13 +1,19 @@
 @import 'variables';
 
 .signin {
+  background-color: $background-light;
   margin: 30% auto;
-  width: 30%;
+  width: 25%;
+  padding: 20px;
+  //border: 3px solid $primary-color;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px $primary-color;
 }
 
 .signin-title {
+  color: $primary-color;
+  margin-top: 0;
   text-align: center;
-  color: #777;
 }
 
 .signin-form {
@@ -27,18 +33,16 @@
   box-shadow: 1px 1px 2px 1px grey;
   transition: 0.25s;
   display: block;
-  width: 250px;
+  width: 80%;
   margin: 0 auto;
 }
 
-.signin-button:focus {
-  outline: none;
-}
-
-.signin-button:active {
-  text-decoration: none;
+.signin-info {
+  text-align: center;
+  color: $primary-color;
 }
 
 .signin-button:hover {
+  color: $primary-color;
   background-color: $secondary-color;
 }
