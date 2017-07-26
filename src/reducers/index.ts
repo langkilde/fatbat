@@ -3,7 +3,7 @@ import {Action} from "../actions/index";
 import {COOKIE_TOKEN, COOKIE_USER_ID} from "../constants";
 import {Store} from "../store/store";
 
-const initialLoginState: Store.Login = {
+const intialAuthState: Store.Auth = {
   authenticated: false,
 };
 
@@ -13,19 +13,33 @@ const initialMenuState: Store.Menu = {
 
 const initialProfileState: Store.Profile = {
   avatar: "https://image.flaticon.com/icons/svg/149/149448.svg",
-  name: "loading...",
+  name: "loading profile...",
 };
 
-function login(state: Store.Login = initialLoginState, action: Action): Store.Login {
+function actionLogger(state = {}, action: Action) {
+  // console.log(action.type);
+  return state;
+}
+
+function auth(state: Store.Auth = intialAuthState, action: Action): Store.Auth {
   switch (action.type) {
     case "LOGIN":
       localStorage.setItem(COOKIE_USER_ID, action.userId);
       localStorage.setItem(COOKIE_TOKEN, action.token);
       
       return {
+        ...state,
         authenticated: true,
         token: action.token,
         userId: action.userId,
+      };
+  
+    case "LOGOUT":
+      localStorage.removeItem(COOKIE_USER_ID);
+      localStorage.removeItem(COOKIE_TOKEN);
+    
+      return {
+        authenticated: false,
       };
   }
   
@@ -58,7 +72,8 @@ function profile(state: Store.Profile = initialProfileState, action: Action): St
 }
 
 export const reducers = combineReducers<Store.All>({
-  login,
+  actionLogger,
+  auth,
   menu,
   profile,
 });

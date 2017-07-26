@@ -1,6 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
+import * as redux from "redux";
+import {Action, logout} from "../../actions/index";
 import {Store} from "../../store/store";
 import HeaderMenu from "./HeaderMenu";
 import HeaderProfile from "./HeaderProfile";
@@ -10,19 +11,36 @@ interface IOwnProps {
 }
 
 interface IConnectedState {
+  authenticated: boolean;
   isActive: boolean;
 }
 
-class Header extends React.Component<IOwnProps & IConnectedState & {}, any> {
+interface IConnectedDispatch {
+  logout: () => Action;
+}
+
+class Header extends React.Component<IOwnProps & IConnectedState & IConnectedDispatch, any> {
   
-  private static getMenuDropdown(isActive: boolean) {
+  constructor(props: IOwnProps & IConnectedState & IConnectedDispatch) {
+    super(props);
+    this.loggingOut = this.loggingOut.bind(this);
+  }
+  
+  public loggingOut() {
+    this.props.logout();
+  }
+  
+  public getMenuDropdown(isActive: boolean) {
     const MENU_ITEMS = (
       <div>
         <div className="dropdown-menu-item">
-          <p >the first item</p>
-        </div>
-        <div className="dropdown-menu-item">
-          <p >the second item</p>
+          <input
+            className="dropdown-menu-button"
+            id="signout"
+            type="button"
+            value="Sign out"
+            onClick={this.loggingOut}
+          />
         </div>
       </div>
     );
@@ -44,7 +62,7 @@ class Header extends React.Component<IOwnProps & IConnectedState & {}, any> {
   }
   
   public render() {
-    const MENU_DROPDOWN = Header.getMenuDropdown(this.props.isActive);
+    const MENU_DROPDOWN = this.getMenuDropdown(this.props.isActive);
     
     return (
       <div className="header-container">
@@ -60,7 +78,12 @@ class Header extends React.Component<IOwnProps & IConnectedState & {}, any> {
 }
 
 const mapStateToProps = (state: Store.All, ownProps: {}): IConnectedState => ({
+  authenticated: state.auth.authenticated,
   isActive: state.menu.isActive,
 });
 
-export default connect(mapStateToProps, {})(Header);
+const mapDispatchToProps = (dispatch: redux.Dispatch<Store.All>): IConnectedDispatch => ({
+  logout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

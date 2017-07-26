@@ -13,6 +13,10 @@
   .desktop-only {
     display: none !important;
   }
+
+  .signin {
+    width: 70%;
+  }
 }
 
 // tablet
@@ -27,6 +31,10 @@
 
   .desktop-only {
     display: none !important;
+  }
+
+  .signin {
+    width: 60%;
   }
 }
 

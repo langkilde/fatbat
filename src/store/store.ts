@@ -2,7 +2,7 @@
 
 export namespace Store {
   
-  export type Login = {
+  export type Auth = {
     authenticated: boolean,
     userId?: string,
     token?: string,
@@ -18,7 +18,7 @@ export namespace Store {
   };
   
   export type All = {
-    login: Login,
+    auth: Auth,
     menu: Menu,
     profile: Profile,
   };

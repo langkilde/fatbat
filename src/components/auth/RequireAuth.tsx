@@ -10,7 +10,7 @@ type HOC<PWrapped, PHoc> = React.ComponentClass<PWrapped & PHoc> | React.SFC<PWr
 
 export function requireAuth<P, StateProps>(Component: HOC<P, IRequireAuthProps>): React.ComponentClass<P> {
   
-  class C extends React.Component<P & ReactRedux.DispatchProp<any> & IRequireAuthProps> {
+  class RequiresAuth extends React.Component<P & ReactRedux.DispatchProp<any> & IRequireAuthProps> {
     
     public render(): JSX.Element {
       return <Component authenticated={this.props.authenticated} {...this.state} />;
@@ -22,15 +22,35 @@ export function requireAuth<P, StateProps>(Component: HOC<P, IRequireAuthProps>)
       }
     }
     
+    public componentWillUpdate() {
+      if (!this.props.authenticated) {
+        history.push("/");
+      }
+    }
+    
+    public componentWillReceiveProps() {
+      if (!this.props.authenticated) {
+        history.push("/");
+      }
+    }
+    
+    public shouldComponentUpdate(nextProps: any, nextState: any) {
+      if (!nextProps.authenticated) {
+        history.push("/");
+      }
+      
+      return !nextProps.authenticated;
+    }
+    
   }
   
   function mapStateToProps(state: any, ownProps: P): IRequireAuthProps {
     return {
-      authenticated: state.login.authenticated,
+      authenticated: state.auth.authenticated,
     };
   }
   
-  return ReactRedux.connect(mapStateToProps)(C);
+  return ReactRedux.connect(mapStateToProps)(RequiresAuth);
   
 }
 

@@ -42,8 +42,8 @@ class HeaderProfile extends React.Component<{} & IConnectedState & IConnectedDis
 const mapStateToProps = (state: Store.All, ownProps: {}): IConnectedState => ({
   avatar: state.profile.avatar,
   name: state.profile.name,
-  token: state.login.token,
-  userId: state.login.userId,
+  token: state.auth.token,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Store.All>): IConnectedDispatch => ({

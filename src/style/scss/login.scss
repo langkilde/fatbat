@@ -2,7 +2,7 @@
 
 .signin {
   background-color: $background-light;
-  margin: 30% auto;
+  margin: 15% auto;
   width: 25%;
   padding: 20px;
   //border: 3px solid $primary-color;
@@ -44,5 +44,5 @@
 
 .signin-button:hover {
   color: $primary-color;
-  background-color: $secondary-color;
+  background-color: $hover-color;
 }

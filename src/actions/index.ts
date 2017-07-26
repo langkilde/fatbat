@@ -7,6 +7,8 @@ export type Action = {
   type: "LOGIN",
   userId: string,
 } | {
+  type: "LOGOUT",
+} | {
   isActive: boolean,
   type: "TOGGLE_MENU",
 } | {
@@ -21,6 +23,14 @@ export function login(userId: string, token: string): Dispatch<Action> {
       token,
       type: "LOGIN",
       userId,
+    });
+  };
+}
+
+export function logout(): Dispatch<Action> {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: "LOGOUT",
     });
   };
 }

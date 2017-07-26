@@ -24,7 +24,6 @@ interface IConnectedDispatch {
 class SigninComponent extends React.Component<IConnectedState & IConnectedDispatch & IOwnProps, {}> {
   
   public componentWillMount() {
-    
     if (this.props.location.search) {
       const params = queryString.parse(this.props.location.search);
       this.props.login(params.user_id, params.access_token);
@@ -42,8 +41,10 @@ class SigninComponent extends React.Component<IConnectedState & IConnectedDispat
         <h1 className="signin-title">Fatbat</h1>
         <form className="signin-form" action="http://localhost:3000/auth">
           <button className="signin-button" type="submit">Sign in</button>
-          <p className="signin-info">Will redirect to fitbit for authentication.</p>
-          <p className="signin-info">Fatbat does not store your credentials, only your oAuth token.</p>
+          <p className="signin-info">
+            Signin will redirect to <a href="https://www.fitbit.com/">Fitbit</a> for authentication.
+          </p>
+          <p className="signin-info">Fatbat does not store your credentials.</p>
         </form>
       </div>
     );
@@ -51,7 +52,7 @@ class SigninComponent extends React.Component<IConnectedState & IConnectedDispat
 }
 
 const mapStateToProps = (state: Store.All, ownProps: IOwnProps): IConnectedState => ({
-  authenticated: state.login.authenticated,
+  authenticated: state.auth.authenticated,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Store.All>): IConnectedDispatch => ({

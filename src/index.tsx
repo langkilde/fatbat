@@ -19,7 +19,7 @@ import {Store} from "./store/store";
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store: ReduxStore<Store.All> = createStoreWithMiddleware(reducers);
 
-// Dispatch stored login information to state if available
+// Dispatch stored auth information to state if available
 const userId = localStorage.getItem(COOKIE_USER_ID);
 const token = localStorage.getItem(COOKIE_TOKEN);
 if (token && userId) {
