@@ -59,3 +59,20 @@ export function fetchProfile(userId: string, token: string): Dispatch<Action> {
       });
   };
 }
+
+export function fetchToday(userId: string, token: string): Dispatch<Action> {
+  return (dispatch: Dispatch<Action>) => {
+    const apiUrl = "http://localhost:4000/api";
+    const query = "?token=" + token + "&refreshToken=true&query=1/user/" + userId + "/profile.json";
+    const fullUrl = apiUrl + query;
+    axios.get(fullUrl)
+      .then((response) => {
+        dispatch({
+          avatar: response.data.user.avatar640,
+          name: response.data.user.fullName,
+          type: "FETCH_PROFILE",
+        });
+      });
+  };
+}
+

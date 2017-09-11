@@ -22,8 +22,8 @@
 
 .signin-button {
   border: 1px solid transparent;
-  background: $primary-color;
-  color: white;
+  color: $primary-color;
+  background-color: $hover-color;
   font-size: 16px;
   line-height: 25px;
   padding: 10px 0;
@@ -43,6 +43,6 @@
 }
 
 .signin-button:hover {
-  color: $primary-color;
-  background-color: $hover-color;
+  background: $primary-color;
+  color: white;
 }
