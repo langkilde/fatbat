@@ -1,6 +1,10 @@
 # How to get started
 
-To setup the system you need to do A B and C
+\#\#\# Part I
 
+Here is some stuff
 
+\#\#\# Part II
+
+Here is some other stuff
 
